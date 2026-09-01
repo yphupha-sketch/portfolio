@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>phupha yaowapankul | Junior Full-Stack Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #1a1a1a;
+      --border: #222222;
+      --text: #e5e5e5;
+      --text-dim: #888888;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --green: #22c55e;
+      --purple: #a855f7;
+      --orange: #f97316;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+    .hamburger span {
+      width: 25px;
+      height: 2px;
+      background: var(--text);
+      transition: 0.3s;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+    }
+
+    /* Hero */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 5rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      width: fit-content;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero-name {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, #3b82f6 50%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+
+    .btn-secondary {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--accent); }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-top: 0.25rem;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-image {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      color: #fff;
+      order: 2;
+    }
+
+    .about-text p {
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+
+    .skill-category h3 {
+      font-size: 1rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .skill-tag {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      transition: all 0.3s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .project-preview {
+      height: 200px;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .project-info { padding: 1.5rem; }
+
+    .project-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-info p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+
+    .project-stack span {
+      background: var(--surface2);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    .project-links { display: flex; gap: 1rem; }
+    .project-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.3s;
+    }
+    .project-links a:hover { color: var(--accent); }
+
+    /* Education/Timeline */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      transform: translateX(-5px);
+    }
+
+    .timeline-date {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-item h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-item .company {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-item p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    /* Contact */
+    #contact {
+      text-align: center;
+    }
+
+    #contact .section-title {
+      font-size: 2.5rem;
+    }
+
+    #contact p {
+      color: var(--text-dim);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    .contact-form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .contact-form textarea { resize: vertical; min-height: 120px; }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .social-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .social-links a:hover { color: var(--accent); }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .hero-name { font-size: 2.5rem; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">AC.</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Open to opportunities
+    </div>
+    <h1 class="hero-name">phupha yaowapankul<br>Junior Full-Stack Developer</h1>
+    <p class="hero-subtitle">Bootcamp graduate eager to build real-world applications and grow as a developer. I love turning ideas into functional, user-friendly web apps.</p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn btn-primary">View My Projects</a>
+      <a href="#contact" class="btn btn-secondary">Contact Me</a>
+    </div>
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-number">6</div>
+        <div class="stat-label">Months Bootcamp</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">8+</div>
+        <div class="stat-label">Projects Built</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Technologies Learned</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Hours of Coding</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-label">About Me</div>
+    <div class="section-title">From bootcamp to my first role</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a career changer and recent graduate of a full-stack web development bootcamp, passionate about building web applications despite coming from a non-tech background. I'm eager to apply my problem-solving skills to a career in software development.</p>
+        <p>During my bootcamp, I built multiple projects from scratch, learned modern frameworks, and gained hands-on experience with agile workflows and team collaboration. I'm a self-motivated learner who thrives on new challenges.</p>
+        <p>Outside of coding, I enjoy contributing to open source, following tech blogs, and exploring new tools. I'm actively seeking a junior developer position where I can contribute, learn, and grow.</p>
+      </div>
+      <div class="about-image">&lt;/&gt;</div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-label">Skills</div>
+    <div class="section-title">Technologies I work with</div>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h3>Frontend</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Tailwind CSS</span>
+          <span class="skill-tag">Responsive Design</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Backend</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Express</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Git</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Tools & Platforms</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">Vercel</span>
+          <span class="skill-tag">Netlify</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Chrome DevTools</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Still Learning</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">AWS Basics</span>
+          <span class="skill-tag">Testing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-label">Projects</div>
+    <div class="section-title">Bootcamp projects</div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-preview">🛒</div>
+        <div class="project-info">
+          <h3>Online Store</h3>
+          <p>Full-stack e-commerce app with product listings, cart, user auth, and checkout flow.</p>
+          <div class="project-stack">
+            <span>React</span><span>Node.js</span><span>MongoDB</span><span>Stripe</span>
+          </div>
+          <div class="project-links">
+            <a href="#">Live Demo &#8594;</a>
+            <a href="#">Source Code &#8594;</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-preview">💬</div>
+        <div class="project-info">
+          <h3>Task Manager App</h3>
+          <p>Collaborative to-do app with user accounts, project boards, and drag-and-drop tasks.</p>
+          <div class="project-stack">
+            <span>React</span><span>Express</span><span>PostgreSQL</span>
+          </div>
+          <div class="project-links">
+            <a href="#">Live Demo &#8594;</a>
+            <a href="#">Source Code &#8594;</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-preview">🌦</div>
+        <div class="project-info">
+          <h3>Weather Dashboard</h3>
+          <p>Weather app using a public API with location search, forecasts, and clean data visualization.</p>
+          <div class="project-stack">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span><span>REST API</span>
+          </div>
+          <div class="project-links">
+            <a href="#">Live Demo &#8594;</a>
+            <a href="#">Source Code &#8594;</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-preview">📝</div>
+        <div class="project-info">
+          <h3>Blog Platform</h3>
+          <p>Simple blogging site with rich text editor, comments, user profiles, and pagination.</p>
+          <div class="project-stack">
+            <span>Next.js</span><span>MongoDB</span><span>CSS Modules</span>
+          </div>
+          <div class="project-links">
+            <a href="#">Live Demo &#8594;</a>
+            <a href="#">Source Code &#8594;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-label">Education</div>
+    <div class="section-title">Where I've studied</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2025 - 2026</div>
+        <h3>Full-Stack Web Development Bootcamp</h3>
+        <div class="company">Coding Academy</div>
+        <p>Completed an intensive 6-month program covering HTML, CSS, JavaScript, React, Node.js, databases, and deployment. Built 8+ projects and collaborated with peers in agile sprints.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Ongoing</div>
+        <h3>Self-Learning</h3>
+        <div class="company">Online Platforms</div>
+        <p>Completed courses on freeCodeCamp, The Odin Project, and Codecademy. Practicing daily and building side projects to strengthen my skills.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <div class="section-title">Let's talk</div>
+    <p>I'm looking for my first junior developer role. If you have an opportunity or just want to chat, feel free to reach out!</p>
+    <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent! (Demo)')">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <input type="text" placeholder="Subject">
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+    <div class="social-links">
+      <a href="#">GitHub</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Twitter</a>
+      <a href="#">dev.to</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 phupha yaowapankul. Built with passion and clean code.
+  </footer>
+
+</body>
+</html>
